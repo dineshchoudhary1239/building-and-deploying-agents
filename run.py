@@ -22,9 +22,10 @@ def main():
     errors = []
 
     # Check for .env / API key
-    if not os.path.exists(".env") and not os.getenv("OPENAI_API_KEY"):
-        print("\n⚠️  WARNING: No .env file found and OPENAI_API_KEY is not set.")
+    if not os.path.exists(".env") and not os.getenv("GROQ_API_KEY"):
+        print("\n⚠️  WARNING: No .env file found and GROQ_API_KEY is not set.")
         print("   Create a .env file based on .env.example before running.")
+        print("   Get a free key at https://console.groq.com/keys")
     else:
         print("✅  Environment variables detected.")
 

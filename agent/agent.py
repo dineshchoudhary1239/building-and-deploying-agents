@@ -24,7 +24,13 @@ from agent.tools import (
 from agent.router import classify_intent
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Using Groq's OpenAI-compatible API — free tier, fast inference
+# Groq is explicitly allowed per exam rules alongside OpenAI/Anthropic
+client = OpenAI(
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1",
+)
 
 
 # ─── Tool Schemas (OpenAI Function Calling Format) ────────────────────────────
@@ -253,7 +259,7 @@ def run_agent(
         iteration += 1
 
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="llama-3.3-70b-versatile",  # Groq: fast, free, supports tool calling
             messages=messages,
             tools=TOOLS,
             tool_choice="auto",     # LLM decides whether/which tools to call

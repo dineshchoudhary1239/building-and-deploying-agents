@@ -27,10 +27,11 @@ st.set_page_config(
 )
 
 # ─── Check API Key ────────────────────────────────────────────────────────────
-if not os.getenv("OPENAI_API_KEY"):
+if not os.getenv("GROQ_API_KEY"):
     st.error(
-        "❌ **OPENAI_API_KEY not found.** "
-        "Please create a `.env` file with `OPENAI_API_KEY=your_key` and restart the app."
+        "❌ **GROQ_API_KEY not found.** "
+        "Please create a `.env` file with `GROQ_API_KEY=your_key` and restart the app. "
+        "Get a free key at https://console.groq.com/keys"
     )
     st.stop()
 
@@ -119,12 +120,12 @@ with st.sidebar:
         st.session_state.last_intent = None
         st.rerun()
 
-    st.caption("Built with GPT-4o · Router Pattern · 5 Tools")
+    st.caption("Built with Llama-3.3-70B (Groq) · Router Pattern · 5 Tools")
 
 
 # ─── Main Area ────────────────────────────────────────────────────────────────
 st.markdown("# 💳 CreditSage AI Loan Advisor")
-st.caption("Powered by GPT-4o with Router Pattern | 5 Specialised Tools | Session Memory")
+st.caption("Powered by Llama-3.3-70B (Groq) with Router Pattern | 5 Specialised Tools | Session Memory")
 
 # ── Intent Badge ──────────────────────────────────────────────────────────────
 INTENT_CONFIG = {

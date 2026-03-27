@@ -18,7 +18,13 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Using Groq's OpenAI-compatible API — free tier, fast inference
+# Groq is explicitly allowed per exam rules alongside OpenAI/Anthropic
+client = OpenAI(
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1",
+)
 
 VALID_INTENTS = ["ELIGIBILITY", "PRODUCT_MATCH", "EMI_CALC", "GENERAL"]
 
@@ -75,7 +81,7 @@ def classify_intent(user_message: str, conversation_history: list = None) -> dic
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",         # Fast, cost-efficient for classification
+            model="llama-3.3-70b-versatile",  # Fast Groq model for classification
             messages=messages,
             temperature=0.0,             # Fully deterministic for consistent routing
             top_p=1.0,

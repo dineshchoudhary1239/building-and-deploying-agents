@@ -1,7 +1,7 @@
 # 💳 CreditSage AI Loan Advisor
 
 An AI-powered loan advisory agent built for CreditSage Financial Technologies.
-Built with **Python**, **GPT-4o**, and **Streamlit** using a **Router Pattern** and **5 specialised tools**.
+Built with **Python**, **Llama-3.3-70B via Groq**, and **Streamlit** using a **Router Pattern** and **5 specialised tools**.
 
 ---
 
@@ -31,7 +31,7 @@ cp .env.example .env
 ```
 Open `.env` and add your OpenAI API key:
 ```
-OPENAI_API_KEY=sk-...your_key_here...
+GROQ_API_KEY=gsk_...your_key_here...
 ```
 
 ### 5. Place the Dataset
@@ -53,12 +53,12 @@ User Query
     ▼
 ┌─────────────────────────────┐
 │      ROUTER AGENT           │  ← LLM-based intent classification
-│  (gpt-4o-mini, temp=0.0)    │    NOT keyword matching
+│  (llama-3.3-70b, temp=0.0)   │    NOT keyword matching
 └────────────┬────────────────┘
              │ Intent: ELIGIBILITY / PRODUCT_MATCH / EMI_CALC / GENERAL
              ▼
 ┌─────────────────────────────┐
-│    ADVISORY AGENT           │  ← Tool-calling loop (gpt-4o)
+│    ADVISORY AGENT           │  ← Tool-calling loop (llama-3.3-70b via Groq)
 │    (OpenAI Function Call)   │    Up to 6 iterations
 └────────────┬────────────────┘
              │ Calls tools based on intent
@@ -112,7 +112,7 @@ The **Router Agent** uses a separate GPT-4o-mini call at `temperature=0.0` to cl
 
 | Variable | Description |
 |----------|-------------|
-| `OPENAI_API_KEY` | Your OpenAI API key (required) |
+| `GROQ_API_KEY` | Your Groq API key — free at https://console.groq.com/keys (required) |
 
 See `.env.example` for the template.
 
@@ -150,7 +150,7 @@ where:
 
 | Package | Version | Purpose |
 |---------|---------|---------|
-| `openai` | ≥1.30 | GPT-4o API + function calling |
+| `openai` | ≥1.30 | Groq API (OpenAI-compatible) + function calling |
 | `streamlit` | ≥1.35 | Web UI |
 | `pandas` | ≥2.0 | CSV data handling |
 | `python-dotenv` | ≥1.0 | Environment variable loading |
